@@ -68,13 +68,13 @@ public class UIUtils {
     }
 
     //判断是否运行在主线程
-    public boolean isRunOnUIThread(){
+    public static boolean isRunOnUIThread(){
         int currentThreadId=android.os.Process.myTid();
         return currentThreadId==getMainThreadId();
     }
 
     //使对象运行在主线程
-    public void runOnUIThread(Runnable r){
+    public static void runOnUIThread(Runnable r){
         if(isRunOnUIThread()){
             r.run();//已经在主线程直接运行
         }else{

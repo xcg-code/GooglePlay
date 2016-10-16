@@ -27,6 +27,24 @@ public class MainActivity extends BaseActivity {
         adapter = new MyAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         pagerTab.setViewPager(viewPager);//将PageTab与ViewPager绑定
+
+        pagerTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                BaseFragment fragment=FragmentFactory.creatFragment(position);
+                fragment.loadData();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     class MyAdapter extends FragmentPagerAdapter {
