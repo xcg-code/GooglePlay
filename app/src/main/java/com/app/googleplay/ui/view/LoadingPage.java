@@ -3,6 +3,7 @@ package com.app.googleplay.ui.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.app.googleplay.R;
@@ -47,6 +48,13 @@ public abstract class LoadingPage extends FrameLayout {
         }
         if(mErrorPage==null){
             mErrorPage = UIUtils.inflate(R.layout.page_error);
+            Button bt_error= (Button) mErrorPage.findViewById(R.id.bt_error);
+            bt_error.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loadingData();
+                }
+            });
             addView(mErrorPage);
         }
         if(mEmptyPage==null){

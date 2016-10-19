@@ -14,11 +14,10 @@ import com.app.googleplay.utils.UIUtils;
 import com.lidroid.xutils.BitmapUtils;
 
 /**
- * Created by 14501_000 on 2016/10/13.
+ * Created by 14501_000 on 2016/10/18.
  */
 
-public class HomeHolder extends BaseHolder<AppInfo> {
-
+public class GameHolder extends BaseHolder<AppInfo> {
     private View view;
     private TextView tv_des;
     private ImageView iv_icon;
@@ -27,7 +26,6 @@ public class HomeHolder extends BaseHolder<AppInfo> {
     private TextView tv_size;
 
     private BitmapUtils mBitmapUtils;
-
     @Override
     public View initView() {
         view = View.inflate(UIUtils.getContext(), R.layout.home_list_item,null);

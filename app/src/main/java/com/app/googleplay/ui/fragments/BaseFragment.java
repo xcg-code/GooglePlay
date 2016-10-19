@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import com.app.googleplay.ui.view.LoadingPage;
 import com.app.googleplay.utils.UIUtils;
 
+import java.util.ArrayList;
+
 /**
  * Created by 14501_000 on 2016/10/10.
  */
@@ -46,5 +48,20 @@ public abstract class BaseFragment extends Fragment {
         if(loadingPage!=null){
             loadingPage.loadingData();
         }
+    }
+
+    //对网络返回的数据进行校验
+    public LoadingPage.ResultState check(Object obj) {
+        if (obj != null) {
+            if (obj instanceof ArrayList) {//判断是否是集合
+                ArrayList list= (ArrayList) obj;
+                if(list.isEmpty()){
+                    return LoadingPage.ResultState.STATE_EMPTY;
+                }else{
+                    return LoadingPage.ResultState.STATE_SUCCESS;
+                }
+            }
+        }
+        return LoadingPage.ResultState.STATE_ERROR;
     }
 }
