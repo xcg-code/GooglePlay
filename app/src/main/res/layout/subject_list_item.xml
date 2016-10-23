@@ -2,21 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@drawable/list_item_bg_selector"
               android:orientation="vertical">
-    <ImageView
-        android:id="@+id/iv_icon"
+    <com.app.googleplay.ui.view.RatioLayout
+        xmlns:gplay="http://schemas.android.com/apk/res/com.app.googleplay"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:background="#5000"/>
+        android:layout_height="wrap_content"
+        gplay:ratio="2.43">
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/subject_default"/>
+    </com.app.googleplay.ui.view.RatioLayout>
     <TextView
         android:id="@+id/tv_des"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:maxLines="1"
         android:text="应用描述：啦啦啦啦啦啦啦啦啦啦啦啦阿拉拉拉"
         android:textColor="#8000"
         android:textSize="16sp"/>

@@ -25,8 +25,8 @@ import java.io.InputStream;
 
 public class HttpHelper {
 
-	public static final String URL = "http://10.0.3.2:8080/WebInfos/";
-	//public static final String URL = "http://127.0.0.1:8089/";
+	public static final String URL = "http://10.0.3.2:8080/WebInfos/";//Genymotion模拟器运行
+	//public static final String URL = "http://192.168.23.1:8080/WebInfos/";//真机运行
 
 	/** get请求，获取返回字符串内容 */
 	public static HttpResult get(String url) {

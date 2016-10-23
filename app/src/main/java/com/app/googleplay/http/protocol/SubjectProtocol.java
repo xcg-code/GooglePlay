@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class SubjectProtocol extends BaseProtocol<ArrayList<SubjectInfo>> {
     @Override
     public String getKey() {
-        return "app/applist";
+        return "app/subjectlist";
     }
 
     @Override
@@ -25,14 +25,8 @@ public class SubjectProtocol extends BaseProtocol<ArrayList<SubjectInfo>> {
 
     @Override
     public ArrayList<SubjectInfo> parseData(String result) {
-        /**
-         * 昨日分析问题至，json数据有问题
-         */
-        System.out.println("数据结果"+result);
         try {
-            System.out.println("位置1");
             JSONArray ja = new JSONArray(result);
-            System.out.println("位置2");
             ArrayList<SubjectInfo> list = new ArrayList<SubjectInfo>();
 
             for (int i = 0; i < ja.length(); i++) {

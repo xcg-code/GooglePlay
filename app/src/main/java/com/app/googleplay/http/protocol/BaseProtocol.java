@@ -39,11 +39,10 @@ public abstract class BaseProtocol<T> {
 
     private String getDataFromServer(int index) {
         // http://www.itheima.com/home?index=0&name=zhangsan&age=18
-        //HttpHelper.HttpResult httpResult=HttpHelper.get(HttpHelper.URL+getKey()+"?index="+index+getParams());
         HttpHelper.HttpResult httpResult=HttpHelper.get(HttpHelper.URL+getKey()+index+getParams());
         if(httpResult!=null){
             String result=httpResult.getString();//获取请求的数据
-            //System.out.println("访问数据结果="+result);
+            System.out.println("访问数据结果="+result);
             //写缓存
             if(!StringUtils.isEmpty(result)){
                 setCache(index,result);
