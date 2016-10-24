@@ -39,7 +39,7 @@ public class GameFragment extends BaseFragment {
         }
 
         @Override
-        public BaseHolder getHolder() {
+        public BaseHolder getHolder(int position) {
             return new GameHolder();
         }
 

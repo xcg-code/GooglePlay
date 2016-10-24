@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 
 public abstract class MyBaseAdapter<T> extends BaseAdapter{
-    private static final  int TYPE_NORMAL=0;
-    private static final int TYPE_MORE=1;
+    private static final  int TYPE_NORMAL=1;
+    private static final int TYPE_MORE=0;
     ArrayList<T> data;//定义一个泛型数据集合
     public MyBaseAdapter(ArrayList<T> data){
         this.data=data;
@@ -45,10 +45,10 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter{
         if(position==(getCount()-1)){//最后一个条目
             return TYPE_MORE;
         }else{
-            return getInnerType();
+            return getInnerType(position);
         }
     }
-    public int getInnerType(){//便于子类重写拓展类型
+    public int getInnerType(int position){//便于子类重写拓展类型
         return TYPE_NORMAL;
     }
 
@@ -60,17 +60,17 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter{
             if(getItemViewType(position)==TYPE_MORE){
                 holder=new MoreHolder(hasMore());
             }else{
-                holder=getHolder();//子类返回具体对象
+                holder=getHolder(position);//子类返回具体对象
             }
-
         }else{
             holder= (BaseHolder) convertView.getTag();
         }
 
-        if(getItemViewType(position)==TYPE_NORMAL){
+        if(getItemViewType(position)!=TYPE_MORE){
             holder.setData(getItem(position));//传递数据并处理
         }else{
             //加载更多数据
+            System.out.println("item类型"+getItemViewType(position));
             MoreHolder moreHolder= (MoreHolder) holder;
             // 一旦加载更多布局展示出来, 就开始加载更多
             // 只有在有更多数据的状态下才加载更多
@@ -85,7 +85,8 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter{
     public boolean hasMore(){
         return true;
     }
-    public abstract BaseHolder getHolder();
+    // 返回当前页面的holder对象, 必须子类实现
+    public abstract BaseHolder<T> getHolder(int position);
     private boolean isLoadMore=false;
 
     public void loadMore(final MoreHolder holder){

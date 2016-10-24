@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class HotProtocol extends BaseProtocol<ArrayList<String>> {
     @Override
     public String getKey() {
-        return "app/hotlist";
+        return "app/recommendlist";
     }
 
     @Override
@@ -23,11 +23,11 @@ public class HotProtocol extends BaseProtocol<ArrayList<String>> {
     @Override
     protected ArrayList<String> parseData(String result) {
         try {
-            JSONArray ja=new JSONArray(result);
-            ArrayList<String> list=new ArrayList<String>();
-            for(int i=0;i<ja.length();i++){
-                String info= (String) ja.get(i);
-                list.add(info);
+            JSONArray ja = new JSONArray(result);
+            ArrayList<String> list = new ArrayList<String>();
+            for (int i = 0; i < ja.length(); i++) {
+                String keyword = ja.getString(i);
+                list.add(keyword);
             }
             return list;
         } catch (JSONException e) {
