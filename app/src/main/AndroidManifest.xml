@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.BaseActivity"/>
+        <activity android:name=".ui.activities.HomeDetailActivity"/>
     </application>
 
 </manifest>

@@ -31,7 +31,7 @@ public class HotFragment extends BaseFragment {
     public View onCreateSuccessView() {
         ScrollView scrollView=new ScrollView(UIUtils.getContext());
         FlowLayout flowLayout=new FlowLayout(UIUtils.getContext());
-
+        //MyFlowLayout flowLayout=new MyFlowLayout(UIUtils.getContext());
         int padding=UIUtils.dip2px(10);
         flowLayout.setPadding(padding,padding,padding,padding);
         flowLayout.setHorizontalSpacing(UIUtils.dip2px(6));// 水平间距
