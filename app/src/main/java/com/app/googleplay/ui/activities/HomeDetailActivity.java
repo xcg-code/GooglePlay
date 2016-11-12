@@ -12,6 +12,7 @@ import com.app.googleplay.ui.holder.DetailAppInfoHolder;
 import com.app.googleplay.ui.holder.DetailDesHolder;
 import com.app.googleplay.ui.holder.DetailPicsHolder;
 import com.app.googleplay.ui.holder.DetailSafeHolder;
+import com.app.googleplay.ui.holder.DownloadHolder;
 import com.app.googleplay.ui.view.LoadingPage;
 import com.app.googleplay.utils.UIUtils;
 
@@ -67,6 +68,11 @@ public class HomeDetailActivity extends BaseActivity {
         DetailDesHolder desHolder=new DetailDesHolder();
         rl_des.addView(desHolder.initView());
         desHolder.setData(data);
+        //应用描述
+        FrameLayout fl_load = (FrameLayout) view.findViewById(R.id.fl_detail_download);
+        DownloadHolder loadHolder=new DownloadHolder();
+        fl_load.addView(loadHolder.initView());
+        loadHolder.setData(data);
         return view;
     }
 
