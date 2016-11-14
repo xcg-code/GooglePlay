@@ -14,9 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -146,7 +143,6 @@ public class DownloadManager {
             notifyDownloadStateChange(downloadInfo);
             File file = new File(downloadInfo.path);
             HttpHelper.HttpResult httpResult;
-            InputStream in = null;
             // 从头开始下载
             if (!file.exists() || file.length() != downloadInfo.currentPos || downloadInfo.currentPos == 0) {
                 //删除无效文件
@@ -155,28 +151,13 @@ public class DownloadManager {
 
                 //从头开始下载
                 httpResult = HttpHelper.download(HttpHelper.URL + downloadInfo.downloadUrl);
-                in = httpResult.getInputStream();
             } else {
                 //断点续传
                 // range 表示请求服务器从文件的哪个位置开始返回数据
-               // httpResult = HttpHelper.download(HttpHelper.URL + downloadInfo.downloadUrl + "&range=" + file.length());
-                URL url = null;
-                try {
-                    url = new URL(HttpHelper.URL + downloadInfo.downloadUrl);
-                    HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
-                    // 设置 User-Agent
-                    httpConnection.setRequestProperty("User-Agent", "NetFox");
-                    // 设置断点续传的开始位置
-                    httpConnection.setRequestProperty("RANGE", "bytes="+file.length());
-                    // 获得输入流
-                    in = httpConnection.getInputStream();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+               httpResult = HttpHelper.download(HttpHelper.URL + downloadInfo.downloadUrl + "&range=" + file.length());
             }
-            if (in!= null) {
+            if (httpResult!=null&&httpResult.getInputStream()!= null) {
+                InputStream in=httpResult.getInputStream();
                 FileOutputStream fos = null;
                 try {
                     //在原文基础上追加数据

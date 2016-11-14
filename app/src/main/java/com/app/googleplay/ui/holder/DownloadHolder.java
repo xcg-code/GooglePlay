@@ -61,11 +61,15 @@ public class DownloadHolder extends BaseHolder<AppInfo> implements DownloadManag
             mCurrentState=DownloadManager.STATE_UNDO;
             mProgress=0;
         }
-        refreshUI(mCurrentState,mProgress);
+        refreshUI(mCurrentState,mProgress,data.id);
     }
 
     // 根据当前的下载进度和状态来更新界面
-    private void refreshUI(int currentState, float progress) {
+    private void refreshUI(int currentState, float progress,String id) {
+        // 由于listview重用机制, 要确保刷新之前, 确实是同一个应用
+        if (!getData().id.equals(id)) {
+            return;
+        }
         mCurrentState=currentState;
         mProgress=progress;
         switch(mCurrentState){
@@ -115,7 +119,7 @@ public class DownloadHolder extends BaseHolder<AppInfo> implements DownloadManag
             UIUtils.runOnUIThread(new Runnable() {
                 @Override
                 public void run() {
-                    refreshUI(info.currentState,info.getProcess());
+                    refreshUI(info.currentState,info.getProcess(),info.id);
                 }
             });
 
@@ -126,8 +130,6 @@ public class DownloadHolder extends BaseHolder<AppInfo> implements DownloadManag
     public void onDownloadStateChange(DownloadInfo info) {
         refreshUIOnMainThread(info);
     }
-
-
 
     @Override
     public void onDownloadProgressChange(DownloadInfo info) {
